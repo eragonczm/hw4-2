@@ -1,0 +1,56 @@
+html {
+  font-family: Roboto;
+  text-align: center;
+}
+.foods {
+  display: inline-block;
+  text-align: center;
+  padding: 15px 15px;
+  margin: 5px 5px;
+}
+
+img {
+  height:100px;
+}
+
+
+header {
+  font-size: 100px;
+  font-weight: 800;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #ffffff;
+  padding: 30px 30px;
+  background-color: #e55039
+}
+
+p {
+  font-size: 20px;
+  margin:10px auto;
+}
+
+input[type=button] {
+  background-color: #e55039;
+  border: none;
+  color: white;
+  padding: 13px 13px;
+  text-decoration: none;
+  margin: 10px 20px;
+  cursor: pointer;
+  font-size: 20px;
+  border-radius: 12px;
+}
+
+input[type=button]:hover {
+  background-color: #a03827;
+  border: none;
+  color: white;
+  padding: 13px 13px;
+  text-decoration: none;
+  margin: 10px 20px;
+  cursor: pointer;
+  font-size: 20px;
+  border-radius: 12px;
+}

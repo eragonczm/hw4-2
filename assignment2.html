@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Joe's Hotdog Stand</title>
+    <link rel="stylesheet" href="style2.css">
+  </head>
+  <body>
+    <header>
+      Joe's Hotdog Stand
+    </header>
+    <div>
+      <div class="foods">
+        <img src="hotdog.png" alt="">
+        <p>Hot Dog</p>
+        <p>price: $3.25</p>
+      </div>
+      <div class="foods" id="fries">
+        <img src="fries.jpg" alt="" >
+        <p>Frence Fries</p>
+        <p>price: $2</p>
+      </div>
+      <div class="foods" id="drinks">
+        <img src="drinks.jpg" alt="">
+        <p>Drinks</p>
+        <p>price: 1.5</p>
+      </div>
+    </div>
+
+    <p id="infoText">You have entered your selection! Click Order button to finish your order! </p>
+
+    <form>
+      <input type="button" id="readyOrder" onclick="takeOrder()" value="Enter what I want">
+      <input type="button" id="submitButton" onclick="calcOrder()" value="Order">
+    </form>
+
+
+
+    <script language="javascript">
+    document.getElementById('readyOrder').style.display = "inline";
+    document.getElementById('submitButton').style.display = "none";
+    document.getElementById('infoText').style.display = "none";
+
+
+      var foodPriceArray = {"hotdog": 3.25, "fries":2, "drinks":1.5};
+      var foodNumberArray = {"hotdog":0, "fries":0, "drinks":0};
+
+      function takeOrder () {
+        for (var i in foodNumberArray) {
+          var numEntered = prompt("Please enter the amount of " + i + ": ", "");
+          foodNumberArray[i] = numEntered;
+        }
+
+        document.getElementById('submitButton').style.display = "inline";
+        document.getElementById('readyOrder').style.display = "none";
+        document.getElementById('infoText').style.display = "inline";
+
+
+
+      }
+
+      function calcOrder () {
+
+        var subtotal = 0;
+        var finalPrice = 0;
+        var discount = 0;
+        var tax;
+        for (var i in foodNumberArray) {
+          subtotal += foodPriceArray[i] * foodNumberArray[i];
+        }
+
+        if (subtotal >= 20) {
+          discount = subtotal * 0.1;
+          finalPrice = subtotal * 0.9 * 1.0625;
+          tax = (subtotal - discount) * 0.0625;
+        } else {
+          tax = subtotal * 0.0625;
+          finalPrice = subtotal + tax;
+        }
+
+        var orderString = "";
+        for (var i in foodNumberArray) {
+          orderString = orderString + i + " quantity: " + foodNumberArray[i] + "\n";
+        }
+
+        subtotal = subtotal.toPrecision(4);
+        discount = discount.toPrecision(4);
+        tax = tax.toPrecision(4);
+        finalPrice = finalPrice.toPrecision(4);
+
+        orderString = orderString + "subtotal: $ " + subtotal + "\n";
+        orderString = orderString + "discount: $ " + discount + "\n";
+        orderString = orderString + "tax: $ " + tax + "\n";
+        orderString = orderString + "total: $ " + finalPrice;
+
+        alert(orderString);
+        document.getElementById('submitButton').style.display = "none";
+        document.getElementById('infoText').innerHTML = "Thank you for your order! Enjoy "
+
+
+      }
+
+    </script>
+
+  </body>
+</html>
