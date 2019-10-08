@@ -30,6 +30,13 @@
     <p id="infoText">You have entered your selection! Click Order button to finish your order! </p>
 
     <form>
+      number of Hotdog: <input type="text" name="hotdot" value="0" id="hotdog">
+      number of French Fries: <input type="text" name="fries" value="0" id="fries">
+      number of Drinks: <input type="text" name="drinks" value="0" id="drinks">
+      <br>
+    </form>
+
+    <form >
       <input type="button" id="readyOrder" onclick="takeOrder()" value="Enter what I want">
       <input type="button" id="submitButton" onclick="calcOrder()" value="Order">
     </form>
@@ -37,6 +44,7 @@
 
 
     <script language="javascript">
+
     document.getElementById('readyOrder').style.display = "inline";
     document.getElementById('submitButton').style.display = "none";
     document.getElementById('infoText').style.display = "none";
@@ -46,16 +54,17 @@
       var foodNumberArray = {"hotdog":0, "fries":0, "drinks":0};
 
       function takeOrder () {
+
         for (var i in foodNumberArray) {
           var numEntered = prompt("Please enter the amount of " + i + ": ", "");
           foodNumberArray[i] = numEntered;
+          alert(i);
+          document.getElementById(i).value = numEntered;
         }
 
+
         document.getElementById('submitButton').style.display = "inline";
-        document.getElementById('readyOrder').style.display = "none";
         document.getElementById('infoText').style.display = "inline";
-
-
 
       }
 
@@ -95,6 +104,7 @@
 
         alert(orderString);
         document.getElementById('submitButton').style.display = "none";
+        document.getElementById('readyOrder').style.display = "none";
         document.getElementById('infoText').innerHTML = "Thank you for your order! Enjoy "
 
 
