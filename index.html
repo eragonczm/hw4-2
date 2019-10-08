@@ -15,29 +15,31 @@
         <p>Hot Dog</p>
         <p>price: $3.25</p>
       </div>
-      <div class="foods" id="fries">
+      <div class="foods" >
         <img src="fries.jpg" alt="" >
         <p>Frence Fries</p>
         <p>price: $2</p>
       </div>
-      <div class="foods" id="drinks">
+      <div class="foods" >
         <img src="drinks.jpg" alt="">
         <p>Drinks</p>
         <p>price: 1.5</p>
       </div>
     </div>
 
-    <p id="infoText">You have entered your selection! Click Order button to finish your order! </p>
+    <!--<p id="infoText">You have entered your selection! Click Order button to finish your order! </p> -->
 
-    <form>
-      number of Hotdog: <input type="text" name="hotdot" value="0" id="hotdog">
+    <form id="myForm">
+      <!-- number of Hotdog: <input type="text" name="hotdot" value="0" id="hotdog">
       number of French Fries: <input type="text" name="fries" value="0" id="fries">
-      number of Drinks: <input type="text" name="drinks" value="0" id="drinks">
+      number of Drinks: <input type="text" name="drinks" value="0" id="drinks"> -->
       <br>
     </form>
 
+    <div id="form_sample"></div>
+
     <form >
-      <input type="button" id="readyOrder" onclick="takeOrder()" value="Enter what I want">
+      <!-- <input type="button" id="readyOrder" onclick="takeOrder()" value="Enter what I want"> -->
       <input type="button" id="submitButton" onclick="calcOrder()" value="Order">
     </form>
 
@@ -45,37 +47,66 @@
 
     <script language="javascript">
 
-    document.getElementById('readyOrder').style.display = "inline";
-    document.getElementById('submitButton').style.display = "none";
-    document.getElementById('infoText').style.display = "none";
+    var foodPriceArray = {"hotdog": 3.25, "fries":2, "drinks":1.5};
+    var foodNumberArray = {"hotdog":0, "fries":0, "drinks":0};
+
+    // document.getElementById('readyOrder').style.display = "inline";
+    // document.getElementById('submitButton').style.display = "none";
+    // document.getElementById('infoText').style.display = "none";
+
+    var x = document.getElementById("form_sample");
+    var createform = document.createElement('form')
+    createform.setAttribute("action", ""); // Setting Action Attribute on Form
+    createform.setAttribute("method", "post"); // Setting Method Attribute on Form
+    x.appendChild(createform);
+
+    for (var i in foodNumberArray) {
+      var thisLabel = document.createElement('label'); // Create Label for Name Field
+      thisLabel.innerHTML = i + ": "; // Set Field Labels
+      createform.appendChild(thisLabel);
+
+      var inputelement = document.createElement('input'); // Create Input Field for Name
+      inputelement.setAttribute("type", "text");
+      inputelement.setAttribute("name", i);
+      inputelement.setAttribute("id", i);
+      createform.appendChild(inputelement);
+
+      var linebreak = document.createElement('br');
+      createform.appendChild(linebreak);
+    }
 
 
-      var foodPriceArray = {"hotdog": 3.25, "fries":2, "drinks":1.5};
-      var foodNumberArray = {"hotdog":0, "fries":0, "drinks":0};
-
-      function takeOrder () {
-
-        for (var i in foodNumberArray) {
-          var numEntered = prompt("Please enter the amount of " + i + ": ", "");
-          foodNumberArray[i] = numEntered;
-          //alert(i);
-          document.getElementById(i).value = numEntered;
-        }
 
 
-        document.getElementById('submitButton').style.display = "inline";
-        document.getElementById('infoText').style.display = "inline";
-
-      }
+      // function takeOrder () {
+      //
+      //   for (var i in foodNumberArray) {
+      //     var numEntered = prompt("Please enter the amount of " + i + ": ", "");
+      //     foodNumberArray[i] = numEntered;
+      //     alert(i);
+      //     document.getElementById(i).value = numEntered;
+      //   }
+      //
+      //
+      //   document.getElementById('submitButton').style.display = "inline";
+      //   document.getElementById('infoText').style.display = "inline";
+      //
+      // }
 
       function calcOrder () {
+
+        for (i in foodNumberArray) {
+          numEntered = document.getElementById(i).value;
+          foodNumberArray[i] = numEntered;
+          //console.log(numEntered);
+        }
 
         var subtotal = 0;
         var finalPrice = 0;
         var discount = 0;
         var tax;
         for (var i in foodNumberArray) {
-          subtotal += foodPriceArray[i] * foodNumberArray[i];
+          subtotal += parseInt(foodPriceArray[i] * foodNumberArray[i]);
         }
 
         if (subtotal >= 20) {
@@ -89,7 +120,7 @@
 
         var orderString = "";
         for (var i in foodNumberArray) {
-          orderString = orderString + i + " quantity: " + foodNumberArray[i] + "\n";
+          orderString = orderString + i + " quantity: " + parseInt(foodNumberArray[i]) + "\n";
         }
 
         subtotal = subtotal.toPrecision(4);
@@ -103,9 +134,9 @@
         orderString = orderString + "total: $ " + finalPrice;
 
         alert(orderString);
-        document.getElementById('submitButton').style.display = "none";
-        document.getElementById('readyOrder').style.display = "none";
-        document.getElementById('infoText').innerHTML = "Thank you for your order! Enjoy "
+        //document.getElementById('submitButton').style.display = "none";
+        //document.getElementById('readyOrder').style.display = "none";
+        //document.getElementById('infoText').innerHTML = "Thank you for your order! Enjoy "
 
 
       }
